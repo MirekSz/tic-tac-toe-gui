@@ -22,8 +22,7 @@ export default class Card extends Component {
                 </div>
                 <div className="panel-body">
                     <h4 className={css.cardSummary}>
-                        Wins : {player.stats.wins}, Loses: {player.stats.loses},
-                        Draws: {player.stats.draws}
+                        Wins : {player.stats.wins}, Loses: {player.stats.loses}, Draws: {player.stats.draws}
                     </h4>
                 </div>
             </div>

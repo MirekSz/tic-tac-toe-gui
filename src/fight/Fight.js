@@ -10,12 +10,16 @@ export default class Fight extends Component {
 
     componentDidMount() {
         var self = this;
+        var lastPplayer='Player 1'
         setInterval(function () {
+            if(lastPplayer =='Player 1'){
+                lastPplayer='Player 2'
+            }
             var x = Math.floor((Math.random() * 3) + 1);
             var y = Math.floor((Math.random() * 3) + 1);
             var param = `x${x}y${y}`;
             var board = self.state.board;
-            board[param] = 'Player 1';
+            board[param] = lastPplayer;
             self.setState({board: board})
         }, 1000)
     }
