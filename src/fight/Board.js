@@ -11,8 +11,31 @@ export default class Board extends Component {
         var result = {}
         var board = this.props.board;
         var {x1y1, x2y1, x3y1, x1y2, x2y2, x3y2, x1y3, x2y3, x3y3} =board;
+
+
         if (x1y1 == x2y1 && x2y1 == x3y1) {
             return {x1y1: css.win, x2y1: css.win, x3y1: css.win};
+        }
+        if (x1y2 == x2y2 && x2y2 == x3y2) {
+            return {x1y2: css.win, x2y2: css.win, x3y2: css.win};
+        }
+        if (x1y3 == x2y3 && x2y3 == x3y3) {
+            return {x1y3: css.win, x2y3: css.win, x3y3: css.win};
+        }
+        if (x1y1 == x1y2 && x1y2 == x1y3) {
+            return {x1y1: css.win, x1y2: css.win, x1y3: css.win};
+        }
+        if (x2y1 == x2y2 && x2y2 == x2y3) {
+            return {x2y1: css.win, x2y2: css.win, x2y3: css.win};
+        }
+        if (x3y1 == x3y2 && x3y2 == x3y3) {
+            return {x3y1: css.win, x3y2: css.win, x3y3: css.win};
+        }
+        if (x1y1 == x2y2 && x2y2 == x3y3) {
+            return {x1y1: css.win, x2y2: css.win, x3y3: css.win};
+        }
+        if (x3y1 == x2y2 && x2y2 == x1y3) {
+            return {x3y1: css.win, x2y2: css.win, x1y3: css.win};
         }
         return result;
     }
@@ -49,5 +72,3 @@ export default class Board extends Component {
         );
     }
 }
-
-

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Card from './../card/Card';
+import _ from 'lodash';
 
 export default class Fight extends Component {
     constructor() {
@@ -8,8 +9,13 @@ export default class Fight extends Component {
 
     render() {
         var cards = [];
-        for (var i = 0; i < this.props.players.length; i++) {
-            var obj = this.props.players[i];
+        var players = _.sortBy(this.props.players, (player)=> {
+            return player.wins + player.draws
+        }).reverse();
+        
+
+        for (var i = 0; i < players.length; i++) {
+            var obj = players[i];
             cards.push(<Card player={obj}/>);
         }
 

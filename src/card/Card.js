@@ -9,7 +9,7 @@ export default class Card extends Component {
     render() {
         var player = this.props.player;
         if (!player) {
-            player = {stats: {}}
+            player = {}
         }
         var panelClass = 'panel-info';
         if (this.props.fight) {
@@ -22,8 +22,14 @@ export default class Card extends Component {
                 </div>
                 <div className="panel-body">
                     <h4 className={css.cardSummary}>
-                        Wins : {player.stats.wins}, Loses: {player.stats.loses}, Draws: {player.stats.draws}
+                        Wins : {player.wins}, Loses: {player.loses}, Draws: {player.draws}
                     </h4>
+                </div>
+                <div className="panel-footer text-right">
+                    <i className="material-icons">timeline</i>&nbsp;
+                    Wins : {player.wins},
+                    Loses: {player.loses},
+                    Draws: {player.draws}
                 </div>
             </div>
         );
