@@ -10,7 +10,7 @@ export default class Fight extends Component {
     render() {
         var cards = [];
         var players = _.sortBy(this.props.players, (player)=> {
-            return player.wins + player.draws
+            return player.wins-player.loses;
         }).reverse();
         
 
@@ -20,7 +20,7 @@ export default class Fight extends Component {
         }
 
         return (
-            <div className=" col-xs-4">
+            <div className="col-xs-4">
                 {cards}
             </div>
         );
