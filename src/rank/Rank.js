@@ -10,9 +10,9 @@ export default class Fight extends Component {
     render() {
         var cards = [];
         var players = _.sortBy(this.props.players, (player)=> {
-            return player.wins-player.loses;
+            return player.wins - player.loses;
         }).reverse();
-        
+
 
         for (var i = 0; i < players.length; i++) {
             var obj = players[i];
