@@ -18,7 +18,13 @@ export default class Card extends Component {
         return (
             <div className={"panel "+ panelClass}>
                 <div className="panel-heading">
-                    <h3 className="panel-title">{player.name}</h3>
+                    <div className="row">
+                        <h3 className="panel-title col-xs-8">{player.name}</h3>
+                    <span className="btn btn-xs btn-success btn-fab-mini col-xs-2"><i
+                        className="material-icons">grade</i>
+                        <div className="ripple-container"></div>
+                    </span>
+                    </div>
                 </div>
                 <div className="panel-body">
                     <h4 className={css.cardSummary}>

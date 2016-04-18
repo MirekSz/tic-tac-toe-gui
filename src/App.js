@@ -1,21 +1,24 @@
 import React, {Component} from 'react';
 import Fight from './fight/Fight';
 import Rank from './rank/Rank';
+import request from 'superagent';
+const initialBoard = {x1y1: 1, x2y1: 2, x3y1: 3, x1y2: 4, x2y2: 5, x3y2: 6, x1y3: 7, x2y3: 8, x3y3: 9};
 export default class App extends Component {
     constructor() {
         super();
         this.state = {
             players: [],
-            board: {x1y1: 1, x2y1: 2, x3y1: 3, x1y2: 4, x2y2: 5, x3y2: 6, x1y3: 7, x2y3: 8, x3y3: 9}
+            board: initialBoard
         };
     }
 
     componentDidMount() {
+        initData(this);
         connect(this);
     }
 
     resetBoard() {
-        this.setState({board: {x1y1: 1, x2y1: 2, x3y1: 3, x1y2: 4, x2y2: 5, x3y2: 6, x1y3: 7, x2y3: 8, x3y3: 9}});
+        this.setState({board: initialBoard});
     }
 
     render() {
@@ -40,7 +43,7 @@ function connect(app) {
         debugger;
         stompClient.subscribe('/topic/round', function (move) {
             app.resetBoard();
-            app.setState({round:move.body});
+            app.setState({round: move.body});
         });
 
         stompClient.subscribe('/topic/fight', function (move) {
@@ -71,7 +74,7 @@ function connect(app) {
         });
     }, function (error) {
         console.log('STOMP: ' + error);
-        setTimeout(()=>{
+        setTimeout(()=> {
             connect(app);
         }, 10000);
         console.log('STOMP: Reconecting in 10 seconds');
@@ -82,6 +85,31 @@ var stompFailureCallback = function (error) {
     setTimeout(connect, 10000);
     console.log('STOMP: Reconecting in 10 seconds');
 };
+
+
+function initData(app) {
+    request
+        .get('http://localhost:8080/getPlayers')
+        .end(function (err, res) {
+            var parse = res.body;
+            app.setState({players: parse});
+
+        });
+    request
+        .get('http://localhost:8080/getCurrentRound')
+        .end(function (err, res) {
+            app.setState({round: res.text});
+        });
+    request
+        .get('http://localhost:8080/getCurrentFight')
+        .end(function (err, res) {
+            var parse = res.body;
+            var playerA = parse.playerA;
+            var playerB = parse.playerB;
+            app.resetBoard();
+            app.setState({playerA, playerB});
+        });
+}
 
 
 
