@@ -110,9 +110,3 @@ function initData(app) {
             app.setState({playerA, playerB});
         });
 }
-
-
-
-
-
-
