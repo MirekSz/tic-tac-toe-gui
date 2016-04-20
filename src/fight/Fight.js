@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import Card from './../card/Card';
 import Board from './Board';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default class Fight extends Component {
     constructor() {
         super();
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
 
 

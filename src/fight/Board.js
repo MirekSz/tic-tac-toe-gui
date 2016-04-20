@@ -6,7 +6,6 @@ export default class Board extends Component {
         super();
     }
 
-
     getWiningSet() {
         var result = {};
         var board = this.props.board;

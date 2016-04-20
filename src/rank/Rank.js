@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import Card from './../card/Card';
 import _ from 'lodash';
 
 export default class Fight extends Component {
     constructor() {
         super();
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.props.players != nextProps.players;
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
 
     render() {

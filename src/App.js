@@ -55,6 +55,9 @@ function connect(app) {
         });
         stompClient.subscribe('/topic/players', function (move) {
             var parse = JSON.parse(move.body);
+            var players = app.state.players;
+            debugger;
+            console.log(players == parse);
             app.setState({players: parse});
         });
         stompClient.subscribe('/topic/move', function (move) {
@@ -93,7 +96,6 @@ function initData(app) {
         .end(function (err, res) {
             var parse = res.body;
             app.setState({players: parse});
-
         });
     request
         .get('http://localhost:8080/getCurrentRound')

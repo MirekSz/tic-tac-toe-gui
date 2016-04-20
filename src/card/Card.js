@@ -1,30 +1,32 @@
 import React, {Component} from 'react';
 import css from './Card.less';
-
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 function Footer(props) {
-    debugger;
     if (props.disable) {
         return <div></div>;
     }
-    return <div>
-        <i className="material-icons">timeline</i>&nbsp;
-        Wins : {props.dwins},
-        Loses: {props.dloses},
-        Draws: {props.ddraws}
-    </div>;
+    return (
+        <div className="panel-footer text-right">
+            <div>
+                <i className="material-icons">flash_on</i>&nbsp;
+                Wins : {props.dwins},
+                Loses: {props.dloses},
+                Draws: {props.ddraws}
+            </div>
+        </div>);
 }
 
 
 export default class Card extends Component {
     constructor() {
         super();
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {dwins: 0, ddraws: 0, dloses: 0};
     }
 
     componentWillReceiveProps(nextProps) {
         if (!this.props.fight && this.props.player) {
-            debugger;
             var {wins, draws, loses} =  this.props.player;
             var nwins = nextProps.player.wins;
             var ndraws = nextProps.player.draws;
@@ -63,9 +65,7 @@ export default class Card extends Component {
                         Wins : {player.wins}, Loses: {player.loses}, Draws: {player.draws}
                     </h4>
                 </div>
-                <div className="panel-footer text-right">
-                    <Footer {...this.state} disable={this.props.fight}/>
-                </div>
+                <Footer {...this.state} disable={this.props.fight}/>
             </div>
         )
     }
