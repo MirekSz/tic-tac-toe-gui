@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-//import App from './App';
+import App from './App';
 
 
-export default class App extends Component {
+export default class Demo extends Component {
     render() {
         return (
             <div>yu
@@ -24,7 +24,6 @@ class Store {
 
     setState(key, val) {
         this.state[key] = val;
-        debugger;
         if (this.listener) {
             this.listener.handleStoresChanged();
         }
@@ -54,7 +53,6 @@ function connectToStores(Component, store, getStateFromStores) {
         handleStoresChanged() {
             if (this.isMounted()) {
                 var stateFromStores = getStateFromStores(this.props);
-                debugger;
                 this.setState(stateFromStores);
             }
         },
@@ -65,8 +63,9 @@ function connectToStores(Component, store, getStateFromStores) {
     return StoreConnection;
 };
 var store = new Store();
-var ProfilePage = connectToStores(App, store, (props) => {
+var ProfilePage = connectToStores(Demo, store, (props) => {
     return {name: store.get('name')}
 });
 store.setState("name", "mirek");
-ReactDOM.render(<ProfilePage name2="maja"/>, document.getElementById('root'));
+//ReactDOM.render(<ProfilePage name2="maja"/>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

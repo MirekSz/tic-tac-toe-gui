@@ -1,9 +1,37 @@
 import React, {Component} from 'react';
 import css from './Card.less';
 
+
+function Footer(props) {
+    debugger;
+    if (props.disable) {
+        return <div></div>;
+    }
+    return <div>
+        <i className="material-icons">timeline</i>&nbsp;
+        Wins : {props.dwins},
+        Loses: {props.dloses},
+        Draws: {props.ddraws}
+    </div>;
+}
+
+
 export default class Card extends Component {
     constructor() {
         super();
+        this.state = {dwins: 0, ddraws: 0, dloses: 0};
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (!this.props.fight && this.props.player) {
+            debugger;
+            var {wins, draws, loses} =  this.props.player;
+            var nwins = nextProps.player.wins;
+            var ndraws = nextProps.player.draws;
+            var nloses = nextProps.player.loses;
+
+            this.setState({dwins: nwins - wins, ddraws: ndraws - draws, dloses: nloses - loses});
+        }
     }
 
     render() {
@@ -15,15 +43,19 @@ export default class Card extends Component {
         if (this.props.fight) {
             panelClass = 'panel-warning';
         }
+        var stars = [];
+        for (var i = 0; i < this.props.stars; i++) {
+            stars.push(<span className="material-icons pull-right">grade</span>)
+
+        }
         return (
             <div className={"panel "+ panelClass}>
-                <div className="panel-heading">
+                <div className="panel-heading container-fluid">
                     <div className="row">
-                        <h3 className="panel-title col-xs-8">{player.name}</h3>
-                    <span className="btn btn-xs btn-success btn-fab-mini col-xs-2"><i
-                        className="material-icons">grade</i>
-                        <div className="ripple-container"></div>
-                    </span>
+                        <div className=" col-xs-8"><h3 className="panel-title">{player.name}</h3></div>
+                        <div className=" col-xs-4">
+                            {stars}
+                        </div>
                     </div>
                 </div>
                 <div className="panel-body">
@@ -32,13 +64,10 @@ export default class Card extends Component {
                     </h4>
                 </div>
                 <div className="panel-footer text-right">
-                    <i className="material-icons">timeline</i>&nbsp;
-                    Wins : {player.wins},
-                    Loses: {player.loses},
-                    Draws: {player.draws}
+                    <Footer {...this.state} disable={this.props.fight}/>
                 </div>
             </div>
-        );
+        )
     }
 }
 

@@ -7,6 +7,10 @@ export default class Fight extends Component {
         super();
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.players != nextProps.players;
+    }
+
     render() {
         var cards = [];
         var players = _.sortBy(this.props.players, (player)=> {
@@ -16,7 +20,7 @@ export default class Fight extends Component {
 
         for (var i = 0; i < players.length; i++) {
             var obj = players[i];
-            cards.push(<Card player={obj}/>);
+            cards.push(<Card player={obj} stars={3-i}/>);
         }
 
         return (
