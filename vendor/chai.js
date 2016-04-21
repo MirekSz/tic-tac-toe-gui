@@ -5124,8 +5124,8 @@ module.exports = function (ctx, name, getter) {
   var _get = Object.getOwnPropertyDescriptor(ctx, name)
     , _super = function () {};
 
-  if (_get && 'function' === typeof _get.get)
-    _super = _get.get
+  if (_get && 'function' === typeof _get.getState)
+    _super = _get.getState
 
   Object.defineProperty(ctx, name,
     { get: function () {

@@ -39,6 +39,7 @@
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.6.2",
     "express": "^4.13.4",
+    "immutable": "^3.8.1",
     "less": "^2.6.1",
     "less-loader": "^2.2.3",
     "lodash": "^4.11.1",
