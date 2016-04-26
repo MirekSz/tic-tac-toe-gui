@@ -1,26 +1,24 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import gameStore from './GameStore';
+import GameActionCreator from './GameActionCreator';
+import {connectToStores} from './flux/Decorators';
 
-import {connectToStores, GameStore} from './Store';
-
-export default class Demo extends Component {
+export default class SimplePrinter extends Component {
     render() {
         return (
             <div>
-                1.{this.props.name2} <br/>
-                1.{JSON.stringify(this.props.board)} <br/>
-                2.{this.props.name}
+                {JSON.stringify(this.props)}
             </div>
         );
     }
 }
 
 
-var store = new GameStore();
-var ProfilePage = connectToStores(App, store, (props) => {
-    return store.getState();
+var ContainerComponent = connectToStores(App, gameStore, (props) => {
+    return gameStore.getAllState();
 });
-store.setState({name: "mirek"});
-ReactDOM.render(<ProfilePage name2="maja"/>, document.getElementById('root'));
-//ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<ContainerComponent name2="maja"/>, document.getElementById('root'));
+GameActionCreator.startGame();
+
