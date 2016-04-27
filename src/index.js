@@ -19,6 +19,6 @@ export default class SimplePrinter extends Component {
 var ContainerComponent = connectToStores(App, gameStore, (props) => {
     return gameStore.getAllState();
 });
-ReactDOM.render(<ContainerComponent name2="maja"/>, document.getElementById('root'));
+ReactDOM.render(<ContainerComponent />, document.getElementById('root'));
 GameActionCreator.startGame();
 

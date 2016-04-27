@@ -38,7 +38,6 @@ export class GameStore extends BaseStore {
             this.setState({board})
         }
 
-
         if (action.type === ACTION_TYPE.RESET_BOARD) {
             this.resetBoard();
         }

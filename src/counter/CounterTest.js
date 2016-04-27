@@ -1,5 +1,6 @@
 var expect = chai.expect;
 import {Simulate, renderIntoDocument, createRenderer} from 'react-addons-test-utils';
+import {shallow, mount} from 'enzyme';
 import Counter from './Counter';
 import React from 'react';
 
@@ -47,7 +48,7 @@ describe('Component Tests...', function () {
             let {name} = counterView.state;
             expect(name).to.be.eq('Mire');
         });
-        ita('should handle click on text by cutting last letter (click simulation)', async ()=> {
+        ita('should handle click on text by cutting last letter (click simulation)', async()=> {
             //given
             const shallowRenderer = createRenderer();
             const counterView = renderIntoDocument(
@@ -71,6 +72,27 @@ describe('Component Tests...', function () {
                     <span style={{color:"red"}}>e</span>]))
         });
 
+        it('renders <Counter /> components', () => {
+            //given
+
+
+            //when
+            const wrapper = mount(<Counter />);
+
+            //then
+            expect(wrapper.text()).to.be.contains('John')
+        });
+        ita('renders <Counter /> components and click on it', async() => {
+            //given
+            const wrapper = mount(<Counter />);
+
+            //when
+            wrapper.find('h2').simulate('click');
+            await wait();
+
+            //then
+            expect(wrapper.text()).to.be.contains('Joh')
+        });
     });
 });
 

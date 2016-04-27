@@ -3,8 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import Card from './../card/Card';
 import _ from 'lodash';
-
-export default class Fight extends Component {
+export default class Rank extends Component {
     constructor() {
         super();
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);

@@ -51,6 +51,8 @@ export function connectToStores(Component, store) {
             return store.getAllState();
         },
         componentDidMount() {
+            console.log('Did Mount: ');
+            console.log(Component);
             store.addListener(this.handleStoresChanged)
         },
         componentWillUnmount() {

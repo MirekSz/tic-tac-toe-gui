@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 function colorize(name) {
-    var chars=[];
+    var chars = [];
     var split = name.split("");
     for (var i = 0; i < split.length; i++) {
         var styles = {color: "red"};
@@ -32,17 +32,19 @@ export default class Counter extends Component {
         this.setState({name: newEmail});
     }
 
-    changeLetters(){
-        return new Promise( (resolve)=> {
-            setTimeout(()=>{
-                this.setState({name: this.state.name.substr(0,this.state.name.length-1)});
+    changeLetters() {
+        console.log('changeLetters: ');
+        return new Promise((resolve)=> {
+            setTimeout(()=> {
+                this.setState({name: this.state.name.substr(0, this.state.name.length - 1)});
+                console.log(this.state.name);
                 resolve();
-            },500)
+            }, 100)
         });
     }
 
     render() {
-        var chars =  colorize(this.state.name);
+        var chars = colorize(this.state.name);
         return (<div>
                 <input valueLink={this.nameValueLink()}/>
                 <h2 onClick={::this.changeLetters} ref="result">{chars}</h2>
@@ -52,6 +54,6 @@ export default class Counter extends Component {
     }
 }
 
-var big = (chars)=>{
+var big = (chars)=> {
     return <h1>{chars}</h1>
 }

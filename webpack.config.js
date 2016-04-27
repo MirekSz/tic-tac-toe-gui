@@ -33,11 +33,23 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             loaders: ['react-hot', 'babel'],
-            include: path.join(__dirname, 'src')
+            include: path.join(__dirname, 'src'),
+            exclude: /node_modules/
         }, {
             test: /\.less$/,
             loader: "style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!less-loader",
-            include: path.join(__dirname, 'src')
-        }]
+            include: path.join(__dirname, 'src'),
+            exclude: /node_modules/
+        },
+            {
+                test: /\.json?$/,
+                loaders: ['json'],
+                exclude: /node_modules/
+            }]
+    },
+    externals: {
+        'cheerio': 'window',
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true
     }
 };

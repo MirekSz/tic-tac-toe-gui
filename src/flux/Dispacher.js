@@ -8,8 +8,8 @@ class Dispacher {
     }
 
     dispach(action) {
-        console.log('action: ');
-        console.log(action);
+//        console.log('action: ');
+//        console.log(action);
 
         this.emmit(action);
     }

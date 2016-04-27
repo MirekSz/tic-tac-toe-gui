@@ -7,6 +7,10 @@ import gameStore from './GameStore';
 export default class App extends Component {
     constructor() {
         super();
+
+    }
+
+    componentWillMount() {
         this.RankContainer = connectToStores(Rank, gameStore, (props) => {
             return gameStore.getAllState();
         });
