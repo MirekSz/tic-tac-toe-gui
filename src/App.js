@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Fight from './fight/Fight';
 import Rank from './rank/Rank';
+import RankContainer from './rank/RankContainer';
 import {connectToStores} from './flux/Decorators';
 import gameStore from './GameStore';
 
@@ -24,6 +25,7 @@ export default class App extends Component {
                 <Fight playerA={this.props.fight.playerA} playerB={this.props.fight.playerB} board={this.props.board}/>
                 <this.RankContainer />
                 <Rank players={this.props.players}/>
+                <RankContainer store={gameStore} component={Rank}/>
             </div>
         );
     }
